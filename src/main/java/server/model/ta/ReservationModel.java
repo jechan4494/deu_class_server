@@ -17,14 +17,6 @@ import java.util.Map;
 
 public class ReservationModel {
 
-    public static JSONArray toJsonArray(List<Reservation> list) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public static Reservation fromJsonRequest(Map<String, Object> request, String 승인) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     // ✅ reservation.json에서 대기 상태만 읽도록 변경
     public List<Reservation> loadReservedReservations() {
         return readFromReservationJson("대기");
