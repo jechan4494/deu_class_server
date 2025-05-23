@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package sever.model.ta;
+package server.model.ta;
 import shared.model.ta.Reservation;
 import org.json.JSONArray;
 import org.json.JSONObject;
