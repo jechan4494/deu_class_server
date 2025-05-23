@@ -1,4 +1,4 @@
-import model.User;
+import server.model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;

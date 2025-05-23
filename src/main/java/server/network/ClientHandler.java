@@ -1,4 +1,4 @@
-import model.User;
+import server.model.User;
 import java.io.*;
 import java.net.Socket;
 
