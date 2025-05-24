@@ -3,9 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package shared.model.ta;
+import java.io.Serializable;
 import java.util.List;
 
-public class Reservation {
+public class Reservation implements Serializable {
+    private static final long serialVersionUID = 1L;  // 직렬화 ID (선택적이지만 권장)
+
     private String name;
     private String role;
     private String type;              // roomType
