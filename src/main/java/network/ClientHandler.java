@@ -1,3 +1,6 @@
+package network;
+
+import controller.UserController;
 import model.User;
 import java.io.*;
 import java.net.Socket;
@@ -11,8 +14,8 @@ public class ClientHandler implements Runnable {
 
   public void run() {
     try (
-        ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())
+            ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream())
     ) {
       String command = (String) ois.readObject();
       if (command.equals("register")) {
