@@ -3,56 +3,58 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controller.ta;
-import org.json.*;
 import shared.model.ta.Reservation;
 import server.model.ta.ReservationModel;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.List;
+import java.util.Map;
+import org.json.JSONArray;
+import org.json.JSONTokener;
+import org.json.JSONObject;
 
 public class ReservationController {
-    private ReservationModel model;
-    private LogController logController;
+    private final ReservationModel model;
+    private final LogController logController;
 
     public ReservationController() {
         this.model = new ReservationModel();
         this.logController = new LogController();
     }
 
-    public void handleRequest(JSONObject request) {
-        String type = request.getString("type");
-        if (type.equals("approve")) {
+    public void handleRequest(Map<String, Object> request) {
+        String type = (String) request.get("type");
+        if ("approve".equals(type)) {
             handleApprove(request);
-        } else if (type.equals("reject")) {
+        } else if ("reject".equals(type)) {
             handleReject(request);
         }
     }
 
-    public void handleApprove(JSONObject req) {
+    public void handleApprove(Map<String, Object> req) {
         Reservation approved = toReservation(req, "승인");
         saveToFile(approved, "approved_reservations.json");
         updateReservationState(approved, "승인");
         logController.saveTaLog("[대기→승인]", approved);
     }
 
-    public void handleReject(JSONObject req) {
+    public void handleReject(Map<String, Object> req) {
         Reservation rejected = toReservation(req, "거절");
         saveToFile(rejected, "rejected_reservations.json");
         updateReservationState(rejected, "거절");
         logController.saveTaLog("[대기→거절]", rejected);
     }
 
-    private Reservation toReservation(JSONObject req, String state) {
-        String name = req.getString("name");
-        String role = req.getString("role");
-        String roomType = req.getString("roomType");
-        int roomNumber = req.getInt("roomNumber");
-        String day = req.getString("day");
-
-        JSONArray slotArray = req.getJSONArray("timeSlots");
-        List<String> timeSlots = slotArray.toList().stream()
-                .map(Object::toString)
-                .toList();
+    @SuppressWarnings("unchecked")
+    private Reservation toReservation(Map<String, Object> req, String state) {
+        String name = (String) req.get("name");
+        String role = (String) req.get("role");
+        String roomType = (String) req.get("roomType");
+        int roomNumber = (int) req.get("roomNumber");
+        String day = (String) req.get("day");
+        List<String> timeSlots = (List<String>) req.get("timeSlots");
 
         return new Reservation(name, role, roomType, roomNumber, day, timeSlots, state);
     }
@@ -113,4 +115,5 @@ public class ReservationController {
         }
     }
 }
+
 

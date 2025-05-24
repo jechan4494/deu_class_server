@@ -5,9 +5,9 @@
 package controller.ta;
 import shared.model.ta.Reservation;
 import org.json.JSONObject;
-import org.json.JSONArray;
 import java.io.*;
 import java.time.LocalDateTime;
+import java.util.*;
 
 public class LogController {
     private static final String LOG_PATH = "ta_log.json";
@@ -45,22 +45,29 @@ public class LogController {
         }
     }
 
-    // ✅ 로그 전체 로딩 (클라이언트에게 전송용)
-    public JSONArray loadLog() {
-        JSONArray logArray = new JSONArray();
+    // ✅ 클라이언트 전송용: 로그를 List<Map> 형식으로 반환
+    public List<Map<String, String>> loadLogAsList() {
+        List<Map<String, String>> logs = new ArrayList<>();
         File file = new File(LOG_PATH);
 
-        if (!file.exists()) return logArray;
+        if (!file.exists()) return logs;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                logArray.put(new JSONObject(line));
+                JSONObject obj = new JSONObject(line);
+                Map<String, String> log = new HashMap<>();
+                log.put("timestamp", obj.optString("timestamp"));
+                log.put("transition", obj.optString("transition"));
+                log.put("targetUser", obj.optString("targetUser"));
+                log.put("room", obj.optString("room"));
+                log.put("time", obj.optString("time"));
+                logs.add(log);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return logArray;
+        return logs;
     }
 }
