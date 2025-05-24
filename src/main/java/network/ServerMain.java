@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.concurrent.Semaphore;
 
 public class ServerMain {
-  private static final int PORT = 9876;
+  private static final int PORT = 9877;
   private static final int MAX_CLIENTS = 3;
   private static final Semaphore semaphore = new Semaphore(MAX_CLIENTS);
 
