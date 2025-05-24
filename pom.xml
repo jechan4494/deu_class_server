@@ -7,6 +7,9 @@
     <groupId>org.example</groupId>
     <artifactId>ServerProject</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>ServerProject</name>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -45,9 +48,17 @@
             <artifactId>json</artifactId>
             <version>20230227</version>
         </dependency>
+
+        <!-- ✅ 공통 SharedModel JAR (ClientProject-1.0-SNAPSHOT.jar) -->
+        <dependency>
+            <groupId>com.shared</groupId>
+            <artifactId>shared-model</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/SharedProject-1.0-SNAPSHOT.jar</systemPath>
+        </dependency>
     </dependencies>
 
-    <!-- ✅ JAR 파일 빌드를 위한 plugin 추가 -->
     <build>
         <plugins>
             <plugin>
@@ -64,4 +75,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
