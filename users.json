@@ -1,0 +1,1 @@
+[{"password":"password","role":"STUDENT","name":"System Test","id":"systemtest","department":"Test Dept"},{"password":"1234","role":"student","name":"나겸","id":"cslee","department":"sw"},{"password":"1234","role":"ta","name":"TA나겸","id":"dglee","department":"TA"},{"password":"1234","role":"professor","name":"교수-나겸","id":"lee","department":"sw"}]
